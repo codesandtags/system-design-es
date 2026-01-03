@@ -6,11 +6,13 @@
 
 Este documento resume los tres pilares fundamentales que distinguen a una aplicación de juguete de un sistema de producción a gran escala.
 
+[![Ver en YouTube](https://img.youtube.com/vi/sCtytua-U28/maxresdefault.jpg)](https://www.youtube.com/watch?v=sCtytua-U28)
+
 ---
 
 ## 📺 Video Explicativo
 
-[![Ver en YouTube](https://img.youtube.com/vi/TU_VIDEO_ID_AQUI/maxresdefault.jpg)](LINK_A_TU_VIDEO_AQUI)
+[![Ver en YouTube](https://img.youtube.com/vi/TceZZJnm0tE/maxresdefault.jpg)](https://www.youtube.com/watch?v=TceZZJnm0tE)
 
 _Haz clic en la imagen para ver la explicación completa y el dibujo en vivo._
 
