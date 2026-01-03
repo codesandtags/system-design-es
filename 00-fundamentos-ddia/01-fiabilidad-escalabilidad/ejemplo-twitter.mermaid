@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant User as Usuario (Famoso)
+    participant LB as Load Balancer
+    participant Service as Servicio Publicación
+    participant DB as Base de Datos
+    participant Cache as Redis (Timelines)
+
+    User->>LB: Publica Tweet
+    LB->>Service: Procesa Tweet
+    Service->>DB: Guarda Tweet en tabla global
+
+    rect rgb(200, 150, 255)
+    note right of Service: Enfoque Fan-out (Push)
+    loop Para cada Seguidor
+        Service->>Cache: Inyecta Tweet en Timeline del seguidor
+    end
+end

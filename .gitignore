@@ -1,0 +1,16 @@
+# General
+.DS_Store
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Excalidraw
+*.excalidraw.png
+*.excalidraw.svg
