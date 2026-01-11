@@ -6,7 +6,7 @@
 
 Este documento explora la "Guerra Santa" de las bases de datos. Desmitificamos que NoSQL es solo para "Big Data" y explicamos cómo la estructura de tus datos (y no solo la escala) debe dictar tu elección tecnológica.
 
-[![Ver en YouTube](https://img.youtube.com/vi/TU_VIDEO_ID_AQUI/maxresdefault.jpg)](LINK_A_TU_VIDEO_AQUI)
+[![Ver en YouTube](https://img.youtube.com/vi/cx_Tg5NdPcY/maxresdefault.jpg)](https://youtu.be/cx_Tg5NdPcY)
 
 ---
 
