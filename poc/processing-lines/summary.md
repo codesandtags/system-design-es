@@ -40,14 +40,14 @@ Seleccionamos 4 lenguajes que representan los distintos cuadrantes del diseño d
 | **Go**      | **Static & Strong**           | **CSP (Goroutines)**           | Paralelismo nativo, memoria compartida via canales, compilado a código máquina.   |
 | **Elixir**  | **Dynamic & Strong**          | **Actor Model (BEAM VM)**      | Procesos aislados, inmutabilidad, tolerancia a fallos masiva.                     |
 
-## 5. Resultados del Benchmark
+## 5. Resultados del Benchmark (Actualizado)
 
 | Posición | Lenguaje    | Tiempo Total | Factor vs. Ganador | Observación Clave                                                                   |
 | :------- | :---------- | :----------- | :----------------- | :---------------------------------------------------------------------------------- |
-| 🥇 **1** | **Go**      | **2.39 s**   | 1x                 | Saturación total de CPU (100% uso). Velocidad "Metal-frío".                         |
-| 🥈 **2** | **Elixir**  | **17.38 s**  | ~7x                | Saturación total de CPU. Overhead natural de la Máquina Virtual (BEAM).             |
-| 🥉 **3** | **Python**  | **27.10 s**  | ~11x               | Limitado a 1 Core. Rápido en hashing solo porque `hashlib` es C nativo.             |
-| 🐢 **4** | **Node.js** | **54.48 s**  | ~22x               | Limitado a 1 Core. Sufrió overhead por gestión de objetos/buffers en el Event Loop. |
+| 🥇 **1** | **Go**      | **2.36 s**   | 1x                 | Saturación total de CPU (100% uso). Velocidad "Metal-frío".                         |
+| 🥈 **2** | **Elixir**  | **17.48 s**  | ~7.4x              | Saturación total de CPU. Overhead natural de la Máquina Virtual (BEAM).             |
+| 🥉 **3** | **Python**  | **27.21 s**  | ~11.5x             | Limitado a 1 Core. Rápido en hashing solo porque `hashlib` es C nativo.             |
+| 🐢 **4** | **Node.js** | **52.43 s**  | ~22.2x             | Limitado a 1 Core. Sufrió overhead por gestión de objetos/buffers en el Event Loop. |
 
 ## 6. Conclusiones Técnicas
 
