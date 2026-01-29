@@ -95,6 +95,7 @@ describe("TokenBucket Rate Limiter", () => {
 
       // Now should allow request
       expect(tokenBucket.allowRequest()).toBe(true);
+      expect(tokenBucket.allowRequest()).toBe(false);
     });
   });
 });

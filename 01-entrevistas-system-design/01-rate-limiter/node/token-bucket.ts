@@ -47,6 +47,7 @@ export class TokenBucket {
     // Calculate how many tokens to add based on elapsed time and refill rate
     const tokensToAdd = elapsedTime * this.refillRate;
 
+    // Refill tokens, but never exceed capacity
     this.tokens = Math.min(this.capacity, this.tokens + tokensToAdd);
     this.lastRefillTimestamp = now;
   }
