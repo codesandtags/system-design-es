@@ -1,27 +1,72 @@
-import { TokenBucket } from "./token-bucket";
+import { TokenBucket } from './token-bucket';
 
-console.log("Hello...");
-
-// This file runs several clients with different rates to simulate a rate limiter
-let capacity = 5;
-let refillRate = 2;
-
-const highCapacityLowRefillRate = new TokenBucket(capacity, refillRate); // 5 capacity, 2 tokens/sec refill rate
-console.log(`Running a high capacity of ${capacity} tokens with a refill rate of ${refillRate} tokens per second...`);
-
-for (let i = 0; i < 10; i++) {
-    const allowed = highCapacityLowRefillRate.allowRequest();
-    console.log(`High Capacity Low Refill Rate - Request ${i + 1}: ${allowed ? "ALLOWED" : "DENIED"}`);
+// Simulamos una base de datos de configuración de clientes
+interface ClientConfig {
+  id: string;
+  tier: 'free' | 'pro' | 'enterprise';
+  bucket: TokenBucket;
 }
 
-// 2 capacity, 5 tokens/sec refill rate
-capacity = 2;
-refillRate = 5;
-const lowCapacityHighRefillRate = new TokenBucket(capacity, refillRate);
-console.log(`\n\nRunning a low capacity of ${capacity} tokens with a refill rate of ${refillRate} tokens per second...`);
+// Configuración de Tiers
+const TIER_LIMITS = {
+  free: { capacity: 2, refillRate: 0.5 },      // 2 burst, 1 req cada 2 seg
+  pro: { capacity: 5, refillRate: 4 },        // 5 burst, 5 req/seg
+  enterprise: { capacity: 50, refillRate: 20 } // 50 burst, 20 req/seg
+};
 
-for (let i = 0; i < 10; i++) {
-    const allowed = lowCapacityHighRefillRate.allowRequest();
-    console.log(`Low Capacity High Refill Rate - Request ${i + 1}: ${allowed ? "ALLOWED" : "DENIED"}`);
+// Inicializamos clientes
+const clients: ClientConfig[] = [
+  {
+    id: 'client-free-01',
+    tier: 'free',
+    bucket: new TokenBucket(TIER_LIMITS.free.capacity, TIER_LIMITS.free.refillRate)
+  },
+  {
+    id: 'client-pro-01',
+    tier: 'pro',
+    bucket: new TokenBucket(TIER_LIMITS.pro.capacity, TIER_LIMITS.pro.refillRate)
+  }
+];
+
+function simulateTraffic() {
+  console.log('🚀 Iniciando simulación de tráfico...\n');
+
+  const totalSteps = 10;
+  let step = 0;
+
+  const interval = setInterval(() => {
+    step++;
+    const now = new Date().toISOString().split('T')[1].replace('Z', '');
+
+    console.log(`--- T=${step}s [${now}] ---`);
+
+    clients.forEach(client => {
+      // Intentamos hacer 3 peticiones simultáneas por cliente en cada tick
+      let successful = 0;
+      const attempts = 5;
+
+      for (let i = 0; i < attempts; i++) {
+        if (client.bucket.allowRequest()) {
+          successful++;
+        }
+      }
+
+      const statusIcon = successful === attempts ? '✅' : (successful > 0 ? '⚠️' : '❌');
+
+      console.log(
+        `${statusIcon} ${client.id} (${client.tier}): ` +
+        `Procesados ${successful}/${attempts} | ` +
+        `Tokens restantes: ${client.bucket.getTokens().toFixed(2)}`
+      );
+    });
+
+    console.log(''); // Espacio vacío
+
+    if (step >= totalSteps) {
+      clearInterval(interval);
+      console.log('🏁 Simulación terminada.');
+    }
+  }, 1000); // Un "tick" de simulación cada segundo real
 }
 
+simulateTraffic();
